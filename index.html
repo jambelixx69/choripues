@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -14,6 +14,7 @@
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth; /* Para el scroll suave de los enlaces del menú */
         }
         .font-title {
             font-family: 'Fredoka One', cursive;
@@ -40,27 +41,20 @@
             height: 100%;
             cursor: pointer;
         }
-        /* Estilos para el video de fondo con iframe de YouTube */
+        /* Estilos para el video de fondo con etiqueta <video> */
         .hero-video-container {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
-            height: 100%; /* Asegura que el contenedor ocupe todo el alto */
+            width: 100%;
+            height: 100%;
             overflow: hidden;
             z-index: 1; 
         }
-        .hero-video-container iframe {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100vw; /* Fuerza el ancho al 100% del viewport width */
-            height: 100vh; /* Fuerza el alto al 100% del viewport height */
-            min-width: 100%; /* Asegura que cubra al menos el ancho del contenedor padre */
-            min-height: 100%; /* Asegura que cubra al menos el alto del contenedor padre */
-            transform: translate(-50%, -50%);
-            pointer-events: none; 
-            border: none;
+        .hero-video {
+            width: 100%; 
+            height: 100%;
+            object-fit: cover; /* Esto es clave para cubrir y evitar barras negras */
         }
         .hero-section {
             position: relative; 
@@ -68,10 +62,9 @@
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            min-height: 70vh; /* Altura mínima para la sección hero */
-             /* Asegura que la sección ocupe todo el ancho disponible */
+            min-height: 70vh; 
             width: 100%;
-            padding: 0; /* Eliminar padding si lo hubiera para que el video ocupe todo */
+            padding: 0; 
         }
         .hero-content-overlay { /* Capa para el contenido sobre el video */
             position: relative;
@@ -84,10 +77,14 @@
             align-items: center;
             padding: 1rem; 
             text-align: center; 
-            /* background-color: rgba(0, 0, 0, 0.5); FONDO OSCURO ELIMINADO */
+            /* background-color: rgba(0, 0, 0, 0.3);  Overlay oscuro opcional, si el video es muy claro */
         }
         .text-shadow { 
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.6); /* Sombra de texto un poco más pronunciada */
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.6); 
+        }
+        /* Estilos para el menú móvil */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
         }
     </style>
     <script>
@@ -137,28 +134,43 @@
             <div>
                 <img src="logo.JPG" alt="Logo Choripues" class="h-12 md:h-16">
             </div>
+            <!-- Menú para Desktop -->
             <div class="hidden md:flex space-x-6">
                 <a href="#menu" class="text-gray-600 hover:text-brand-orange transition duration-300">El Menú</a>
                 <a href="#nosotros" class="text-gray-600 hover:text-brand-orange transition duration-300">¿Quiénes Somos?</a>
                 <a href="#contacto" class="text-gray-600 hover:text-brand-orange transition duration-300">¡Caiga Pues!</a>
             </div>
-            <a href="https://wa.me/573107625564?text=¡Hola!%20Quiero%20hacer%20un%20pedido%20de%20Choripues." target="_blank" class="bg-brand-orange text-white font-bold py-2 px-4 rounded-full flex items-center space-x-2 hover:bg-orange-500 transition duration-300">
-                <span class="hidden sm:inline">Pedir Ahora</span>
+            <!-- Botón Pedir Ahora (Desktop) -->
+            <a href="https://wa.me/573107625564?text=¡Hola!%20Quiero%20hacer%20un%20pedido%20de%20Choripues." target="_blank" class="hidden md:flex bg-brand-orange text-white font-bold py-2 px-4 rounded-full items-center space-x-2 hover:bg-orange-500 transition duration-300">
+                <span>Pedir Ahora</span>
                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
             </a>
+            <!-- Botón Hamburguesa para Móvil -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 hover:text-brand-orange focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
         </nav>
+        <!-- Menú Desplegable para Móvil -->
+        <div id="mobile-menu" class="md:hidden bg-white shadow-lg absolute top-full left-0 w-full hidden transform -translate-y-full">
+            <a href="#menu" class="block px-4 py-3 text-gray-600 hover:bg-brand-orange hover:text-white transition duration-300">El Menú</a>
+            <a href="#nosotros" class="block px-4 py-3 text-gray-600 hover:bg-brand-orange hover:text-white transition duration-300">¿Quiénes Somos?</a>
+            <a href="#contacto" class="block px-4 py-3 text-gray-600 hover:bg-brand-orange hover:text-white transition duration-300">¡Caiga Pues!</a>
+            <a href="https://wa.me/573107625564?text=¡Hola!%20Quiero%20hacer%20un%20pedido%20de%20Choripues." target="_blank" class="block px-4 py-3 text-green-500 font-bold hover:bg-green-500 hover:text-white transition duration-300">Pedir por WhatsApp</a>
+        </div>
     </header>
 
-    <!-- Sección Hero con Video de Fondo (IFRAME de YouTube) -->
+    <!-- Sección Hero con Video de Fondo -->
     <section class="hero-section">
         <div class="hero-video-container">
-            <!-- IMPORTANTE: REEMPLAZA 'VIDEO_ID_AQUI' con el ID real de tu video de YouTube -->
-            <iframe 
-                src="https://www.youtube.com/embed/ue2CGvH7A2I?autoplay=1&mute=1&loop=1&playlist=ue2CGvH7A2I&controls=0&showinfo=0&modestbranding=1&rel=0&iv_load_policy=3&loop=1&playlist=ue2CGvH7A2I&autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen>
-            </iframe>
+            <video autoplay loop muted playsinline class="hero-video">
+                <!-- IMPORTANTE: REEMPLAZAR CON EL ENLACE DIRECTO A TU VIDEO .MP4 -->
+                <source src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4" type="video/mp4">
+                Tu navegador no soporta videos HTML5. Considera actualizarlo.
+            </video>
         </div>
         <div class="hero-content-overlay"> 
             <div class="container mx-auto px-6">
@@ -180,7 +192,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Bandeja Paisa -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="bandeja.JPG" alt="Bandeja Paisa Choripues" class="w-full h-56 object-cover">
+                    <img src="bandeja.JPG" alt="Bandeja Paisa Choripues" class="w-full h-64 object-cover"> <!-- Aumenté un poco la altura h-64 -->
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Bandeja Paisa</h3>
                         <p class="text-gray-600 mt-2 text-sm">¡La mera mera! Frijoles, arroz, chicharrón, carne molida, chorizo, huevo, plátano maduro, arepa y aguacate.</p>
@@ -189,7 +201,7 @@
                 </div>
                 <!-- Frijolada -->
                  <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="otra bandejq.JPG" alt="Frijolada Choripues" class="w-full h-56 object-cover">
+                    <img src="otra bandejq.JPG" alt="Frijolada Choripues" class="w-full h-64 object-cover">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Frijolada CHORIPUES</h3>
                         <p class="text-gray-600 mt-2 text-sm">Una cazuela llena del mejor sabor de nuestros fríjoles tradicionales.</p>
@@ -198,7 +210,7 @@
                 </div>
                 <!-- Picada Paisa -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="picada.JPG" alt="Picada Paisa Choripues" class="w-full h-56 object-cover">
+                    <img src="picada.JPG" alt="Picada Paisa Choripues" class="w-full h-64 object-cover">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Picada Paisa CHORIPUES</h3>
                         <p class="text-gray-600 mt-2 text-sm">Pa' compartir con los parceros. Chicharrón, chorizo, morcilla, papa y patacón.</p>
@@ -207,7 +219,7 @@
                 </div>
                 <!-- Bandeja TODOPUES -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="bandeja todo pues.JPG" alt="Bandeja Todopues de Choripues" class="w-full h-56 object-cover">
+                    <img src="bandeja todo pues.JPG" alt="Bandeja Todopues de Choripues" class="w-full h-64 object-cover">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Bandeja TODOPUES</h3>
                         <p class="text-gray-600 mt-2 text-sm">Una versión más ligera pero con todo el sabor: chorizo, chicharrón, morcilla y maduro.</p>
@@ -216,7 +228,7 @@
                 </div>
                 <!-- Arepas Rellenas -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="image_bbf561.png" alt="Arepas Rellenas en Choripues" class="w-full h-56 object-cover object-bottom"> 
+                    <img src="image_bbf561.png" alt="Arepas Rellenas en Choripues" class="w-full h-64 object-contain p-2 bg-gray-100"> <!-- object-contain para verla completa -->
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Arepas Rellenas</h3>
                         <p class="text-gray-600 mt-2 text-sm">La arepita paisa pero llevada a otro nivel. ¡Pregunta por los rellenos!</p>
@@ -225,7 +237,7 @@
                 </div>
                 <!-- Pa' la Sed -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="image_bbf239.png" alt="Bebidas en Choripues" class="w-full h-56 object-cover object-bottom">
+                    <img src="image_bbf239.png" alt="Bebidas en Choripues" class="w-full h-64 object-contain p-2 bg-gray-100"> <!-- object-contain para verla completa -->
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Pa' la Sed</h3>
                         <p class="text-gray-600 mt-2 text-sm">Acompañe su manjar con Gaseosa Postobón, Coca-Cola o una cervecita bien fría.</p>
@@ -235,6 +247,7 @@
             </div>
             <div class="text-center mt-12">
                  <p class="italic text-gray-700">¡Y mucho más! Tenemos mondongo, cazuela, calentao, tamales... ¡Pregúntanos por tu favorito!</p>
+                 <p class="mt-4 text-sm text-gray-500">Nota: Las imágenes de los platos son de referencia. Para una mejor apreciación, te recomendamos visitarnos o pedir nuevas fotos.</p>
             </div>
         </div>
     </section>
@@ -307,6 +320,41 @@
             <p class="text-gray-500 text-sm">© 2025 Choripues. Todos los derechos reservados. Creado con Alegría.</p>
         </div>
     </footer>
+
+    <script>
+        // Script para el menú móvil
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                setTimeout(() => { // Pequeño delay para que la clase 'hidden' se quite antes de la transformación
+                    mobileMenu.classList.remove('-translate-y-full');
+                    mobileMenu.classList.add('translate-y-0');
+                }, 10);
+            } else {
+                mobileMenu.classList.remove('translate-y-0');
+                mobileMenu.classList.add('-translate-y-full');
+                setTimeout(() => { // Delay para que la animación de salida ocurra antes de añadir 'hidden'
+                    mobileMenu.classList.add('hidden');
+                }, 300); // 300ms es la duración de la transición
+            }
+        });
+
+        // Cerrar menú móvil al hacer clic en un enlace
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-y-0');
+                mobileMenu.classList.add('-translate-y-full');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+            });
+        });
+    </script>
 
 </body>
 </html>
