@@ -14,17 +14,17 @@
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            scroll-behavior: smooth; /* Para el scroll suave de los enlaces del menú */
+            scroll-behavior: smooth; 
         }
         .font-title {
             font-family: 'Fredoka One', cursive;
         }
-        .pulse-anim { /* Animación para el botón de WhatsApp */
+        .pulse-anim { 
             animation: pulse-animation 2s infinite;
         }
         @keyframes pulse-animation {
             0% {
-                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); /* Color verde WhatsApp */
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); 
             }
             100% {
                 box-shadow: 0 0 0 25px rgba(34, 197, 94, 0);
@@ -41,20 +41,28 @@
             height: 100%;
             cursor: pointer;
         }
-        /* Estilos para el video de fondo con etiqueta <video> */
+        /* Estilos para el video de fondo con iframe de YouTube */
         .hero-video-container {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100%; 
+            height: 100%; 
             overflow: hidden;
             z-index: 1; 
         }
-        .hero-video {
-            width: 100%; 
-            height: 100%;
-            object-fit: cover; /* Esto es clave para cubrir y evitar barras negras */
+        .hero-video-container iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            /* Ajustes para intentar cubrir y centrar mejor el video */
+            width: 100vw; /* Ancho del viewport */
+            height: 56.25vw; /* Alto basado en aspect ratio 16:9 (9/16*100) */
+            min-height: 100vh; /* Mínimo alto del viewport */
+            min-width: 177.77vh; /* Mínimo ancho basado en aspect ratio 16:9 (16/9*100) */
+            transform: translate(-50%, -50%);
+            pointer-events: none; 
+            border: none;
         }
         .hero-section {
             position: relative; 
@@ -66,7 +74,7 @@
             width: 100%;
             padding: 0; 
         }
-        .hero-content-overlay { /* Capa para el contenido sobre el video */
+        .hero-content-overlay { 
             position: relative;
             z-index: 2; 
             width: 100%;
@@ -77,12 +85,11 @@
             align-items: center;
             padding: 1rem; 
             text-align: center; 
-            /* background-color: rgba(0, 0, 0, 0.3);  Overlay oscuro opcional, si el video es muy claro */
+            /* background-color: rgba(0, 0, 0, 0.3); FONDO OSCURO ELIMINADO */
         }
         .text-shadow { 
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.6); 
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7); /* Sombra de texto más notoria */
         }
-        /* Estilos para el menú móvil */
         #mobile-menu {
             transition: transform 0.3s ease-in-out;
         }
@@ -130,32 +137,38 @@
 
     <!-- Encabezado -->
     <header class="bg-white shadow-md sticky top-0 z-30"> 
-        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <div>
-                <img src="logo.JPG" alt="Logo Choripues" class="h-12 md:h-16">
+        <nav class="container mx-auto px-4 sm:px-6 py-3 flex items-center justify-between relative">
+            <!-- Logo - Centrado en Móvil -->
+            <div class="absolute inset-x-0 top-1/2 transform -translate-y-1/2 text-center md:static md:inset-auto md:transform-none md:text-left md:flex-initial">
+                <img src="logo.JPG" alt="Logo Choripues" class="h-12 md:h-16 inline-block">
             </div>
+
             <!-- Menú para Desktop -->
-            <div class="hidden md:flex space-x-6">
+            <div class="hidden md:flex flex-grow justify-center space-x-6 items-center">
                 <a href="#menu" class="text-gray-600 hover:text-brand-orange transition duration-300">El Menú</a>
                 <a href="#nosotros" class="text-gray-600 hover:text-brand-orange transition duration-300">¿Quiénes Somos?</a>
                 <a href="#contacto" class="text-gray-600 hover:text-brand-orange transition duration-300">¡Caiga Pues!</a>
             </div>
-            <!-- Botón Pedir Ahora (Desktop) -->
-            <a href="https://wa.me/573107625564?text=¡Hola!%20Quiero%20hacer%20un%20pedido%20de%20Choripues." target="_blank" class="hidden md:flex bg-brand-orange text-white font-bold py-2 px-4 rounded-full items-center space-x-2 hover:bg-orange-500 transition duration-300">
-                <span>Pedir Ahora</span>
-                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-            </a>
-            <!-- Botón Hamburguesa para Móvil -->
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-gray-600 hover:text-brand-orange focus:outline-none">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                    </svg>
-                </button>
+            
+            <!-- Contenedor para Botón Pedir (Desktop) y Hamburguesa (Móvil) -->
+            <div class="flex items-center md:flex-initial justify-end">
+                 <!-- Botón Pedir Ahora (Desktop) -->
+                <a href="https://wa.me/573107625564?text=¡Hola!%20Quiero%20hacer%20un%20pedido%20de%20Choripues." target="_blank" class="hidden md:flex bg-brand-orange text-white font-bold py-2 px-4 rounded-full items-center space-x-2 hover:bg-orange-500 transition duration-300">
+                    <span>Pedir Ahora</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                </a>
+                <!-- Botón Hamburguesa para Móvil -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-brand-orange focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </nav>
         <!-- Menú Desplegable para Móvil -->
-        <div id="mobile-menu" class="md:hidden bg-white shadow-lg absolute top-full left-0 w-full hidden transform -translate-y-full">
+        <div id="mobile-menu" class="md:hidden bg-white shadow-lg absolute top-full left-0 w-full hidden transform -translate-y-full z-20">
             <a href="#menu" class="block px-4 py-3 text-gray-600 hover:bg-brand-orange hover:text-white transition duration-300">El Menú</a>
             <a href="#nosotros" class="block px-4 py-3 text-gray-600 hover:bg-brand-orange hover:text-white transition duration-300">¿Quiénes Somos?</a>
             <a href="#contacto" class="block px-4 py-3 text-gray-600 hover:bg-brand-orange hover:text-white transition duration-300">¡Caiga Pues!</a>
@@ -163,14 +176,16 @@
         </div>
     </header>
 
-    <!-- Sección Hero con Video de Fondo -->
+    <!-- Sección Hero con Video de Fondo (IFRAME de YouTube) -->
     <section class="hero-section">
         <div class="hero-video-container">
-            <video autoplay loop muted playsinline class="hero-video">
-                <!-- IMPORTANTE: REEMPLAZAR CON EL ENLACE DIRECTO A TU VIDEO .MP4 -->
-                <source src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4" type="video/mp4">
-                Tu navegador no soporta videos HTML5. Considera actualizarlo.
-            </video>
+            <!-- IMPORTANTE: REEMPLAZA 'VIDEO_ID_AQUI' con el ID real de tu video de YouTube -->
+            <iframe 
+                src="https://www.youtube.com/embed/ue2CGvH7A2I?autoplay=1&mute=1&loop=1&playlist=ue2CGvH7A2I&controls=0&showinfo=0&modestbranding=1&rel=0&iv_load_policy=3&loop=1&playlist=dQw4w9WgXcQ&autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+            </iframe>
         </div>
         <div class="hero-content-overlay"> 
             <div class="container mx-auto px-6">
@@ -192,7 +207,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Bandeja Paisa -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="bandeja.JPG" alt="Bandeja Paisa Choripues" class="w-full h-64 object-cover"> <!-- Aumenté un poco la altura h-64 -->
+                    <img src="bandeja.JPG" alt="Bandeja Paisa Choripues" class="w-full h-64 object-cover"> 
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Bandeja Paisa</h3>
                         <p class="text-gray-600 mt-2 text-sm">¡La mera mera! Frijoles, arroz, chicharrón, carne molida, chorizo, huevo, plátano maduro, arepa y aguacate.</p>
@@ -228,7 +243,7 @@
                 </div>
                 <!-- Arepas Rellenas -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="image_bbf561.png" alt="Arepas Rellenas en Choripues" class="w-full h-64 object-contain p-2 bg-gray-100"> <!-- object-contain para verla completa -->
+                    <img src="image_bbf561.png" alt="Arepas Rellenas en Choripues" class="w-full h-64 object-contain p-2 bg-gray-100"> 
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Arepas Rellenas</h3>
                         <p class="text-gray-600 mt-2 text-sm">La arepita paisa pero llevada a otro nivel. ¡Pregunta por los rellenos!</p>
@@ -237,7 +252,7 @@
                 </div>
                 <!-- Pa' la Sed -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="image_bbf239.png" alt="Bebidas en Choripues" class="w-full h-64 object-contain p-2 bg-gray-100"> <!-- object-contain para verla completa -->
+                    <img src="image_bbf239.png" alt="Bebidas en Choripues" class="w-full h-64 object-contain p-2 bg-gray-100"> 
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Pa' la Sed</h3>
                         <p class="text-gray-600 mt-2 text-sm">Acompañe su manjar con Gaseosa Postobón, Coca-Cola o una cervecita bien fría.</p>
@@ -330,20 +345,19 @@
             const isHidden = mobileMenu.classList.contains('hidden');
             if (isHidden) {
                 mobileMenu.classList.remove('hidden');
-                setTimeout(() => { // Pequeño delay para que la clase 'hidden' se quite antes de la transformación
+                setTimeout(() => { 
                     mobileMenu.classList.remove('-translate-y-full');
                     mobileMenu.classList.add('translate-y-0');
                 }, 10);
             } else {
                 mobileMenu.classList.remove('translate-y-0');
                 mobileMenu.classList.add('-translate-y-full');
-                setTimeout(() => { // Delay para que la animación de salida ocurra antes de añadir 'hidden'
+                setTimeout(() => { 
                     mobileMenu.classList.add('hidden');
-                }, 300); // 300ms es la duración de la transición
+                }, 300); 
             }
         });
 
-        // Cerrar menú móvil al hacer clic en un enlace
         const mobileMenuLinks = mobileMenu.querySelectorAll('a');
         mobileMenuLinks.forEach(link => {
             link.addEventListener('click', () => {
