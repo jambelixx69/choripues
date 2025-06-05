@@ -90,7 +90,14 @@
             text-shadow: 2px 2px 8px rgba(0,0,0,0.7); 
         }
         #mobile-menu {
-            transition: transform 0.3s ease-in-out;
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden; /* Evita que el contenido se muestre antes de la animación */
+        }
+        #mobile-menu.open {
+            max-height: 500px; /* Suficiente altura para el menú */
+            opacity: 1;
         }
     </style>
     <script>
@@ -165,7 +172,7 @@
             </div>
         </nav>
         <!-- Menú Desplegable para Móvil -->
-        <div id="mobile-menu" class="md:hidden bg-white shadow-lg absolute top-full left-0 w-full hidden transform -translate-y-full z-20">
+        <div id="mobile-menu" class="md:hidden bg-white shadow-lg absolute top-full left-0 w-full z-20">
             <a href="#menu" class="block px-4 py-3 text-gray-600 hover:bg-brand-orange hover:text-white transition duration-300">El Menú</a>
             <a href="#nosotros" class="block px-4 py-3 text-gray-600 hover:bg-brand-orange hover:text-white transition duration-300">¿Quiénes Somos?</a>
             <a href="#contacto" class="block px-4 py-3 text-gray-600 hover:bg-brand-orange hover:text-white transition duration-300">¡Caiga Pues!</a>
@@ -202,48 +209,54 @@
             <p class="text-center text-gray-600 mb-12 max-w-xl mx-auto">Pa' que se antoje y pida de una. ¡Todo hecho con amor y el toque secreto de la abuela!</p>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Bandeja Paisa -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="bandeja.JPG" alt="Bandeja Paisa Choripues" class="w-full h-64 object-cover"> 
+                    <img src="bandeja.JPG" alt="Bandeja Paisa Choripues" class="w-full h-56 object-cover"> <!-- Altura reducida a h-56 -->
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Bandeja Paisa</h3>
                         <p class="text-gray-600 mt-2 text-sm">¡La mera mera! Frijoles, arroz, chicharrón, carne molida, chorizo, huevo, plátano maduro, arepa y aguacate.</p>
                         <p class="text-xl font-bold mt-4">COP $33,000</p>
                     </div>
                 </div>
+                <!-- Frijolada -->
                  <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="otra bandejq.JPG" alt="Frijolada Choripues" class="w-full h-64 object-cover">
+                    <img src="otra bandejq.JPG" alt="Frijolada Choripues" class="w-full h-56 object-cover"> <!-- Altura reducida a h-56 -->
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Frijolada CHORIPUES</h3>
                         <p class="text-gray-600 mt-2 text-sm">Una cazuela llena del mejor sabor de nuestros fríjoles tradicionales.</p>
                         <p class="text-xl font-bold mt-4">COP $21,000</p>
                     </div>
                 </div>
+                <!-- Picada Paisa -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="picada.JPG" alt="Picada Paisa Choripues" class="w-full h-64 object-cover">
+                    <img src="picada.JPG" alt="Picada Paisa Choripues" class="w-full h-56 object-cover"> <!-- Altura reducida a h-56 -->
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Picada Paisa CHORIPUES</h3>
                         <p class="text-gray-600 mt-2 text-sm">Pa' compartir con los parceros. Chicharrón, chorizo, morcilla, papa y patacón.</p>
                         <p class="text-xl font-bold mt-4">COP $25,000</p>
                     </div>
                 </div>
+                <!-- Bandeja TODOPUES -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="bandeja todo pues.JPG" alt="Bandeja Todopues de Choripues" class="w-full h-64 object-cover">
+                    <img src="bandeja todo pues.JPG" alt="Bandeja Todopues de Choripues" class="w-full h-56 object-cover"> <!-- Altura reducida a h-56 -->
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Bandeja TODOPUES</h3>
                         <p class="text-gray-600 mt-2 text-sm">Una versión más ligera pero con todo el sabor: chorizo, chicharrón, morcilla y maduro.</p>
                         <p class="text-xl font-bold mt-4">COP $25,000</p>
                     </div>
                 </div>
+                <!-- Arepas Rellenas -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="image_bbf561.png" alt="Arepas Rellenas en Choripues" class="w-full h-64 object-contain p-2 bg-gray-100"> 
+                    <img src="image_bbf561.png" alt="Arepas Rellenas en Choripues" class="w-full h-56 object-contain p-2 bg-gray-100"> <!-- Altura reducida y object-contain -->
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Arepas Rellenas</h3>
                         <p class="text-gray-600 mt-2 text-sm">La arepita paisa pero llevada a otro nivel. ¡Pregunta por los rellenos!</p>
                         <p class="text-xl font-bold mt-4">COP $12,500</p>
                     </div>
                 </div>
+                <!-- Pa' la Sed -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="image_bbf239.png" alt="Bebidas en Choripues" class="w-full h-64 object-contain p-2 bg-gray-100"> 
+                    <img src="image_bbf239.png" alt="Bebidas en Choripues" class="w-full h-56 object-contain p-2 bg-gray-100"> <!-- Altura reducida y object-contain -->
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Pa' la Sed</h3>
                         <p class="text-gray-600 mt-2 text-sm">Acompañe su manjar con Gaseosa Postobón, Coca-Cola o una cervecita bien fría.</p>
@@ -325,34 +338,26 @@
     </footer>
 
     <script>
+        // Script para el menú móvil
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
 
         mobileMenuButton.addEventListener('click', () => {
-            const isHidden = mobileMenu.classList.contains('hidden');
-            if (isHidden) {
-                mobileMenu.classList.remove('hidden');
-                setTimeout(() => { 
-                    mobileMenu.classList.remove('-translate-y-full');
-                    mobileMenu.classList.add('translate-y-0');
-                }, 10);
-            } else {
-                mobileMenu.classList.remove('translate-y-0');
-                mobileMenu.classList.add('-translate-y-full');
-                setTimeout(() => { 
-                    mobileMenu.classList.add('hidden');
-                }, 300); 
-            }
+            mobileMenu.classList.toggle('open'); // Esta clase ahora controla max-height y opacity
+            mobileMenu.classList.toggle('hidden'); // Se usa solo para el estado inicial
         });
 
+        // Cerrar menú móvil al hacer clic en un enlace
         const mobileMenuLinks = mobileMenu.querySelectorAll('a');
         mobileMenuLinks.forEach(link => {
             link.addEventListener('click', () => {
-                mobileMenu.classList.remove('translate-y-0');
-                mobileMenu.classList.add('-translate-y-full');
+                mobileMenu.classList.remove('open');
+                // Opcional: agregar 'hidden' después de la animación de cierre si es necesario
                 setTimeout(() => {
-                    mobileMenu.classList.add('hidden');
-                }, 300);
+                    if (!mobileMenu.classList.contains('open')) { // Solo ocultar si realmente está cerrado
+                         mobileMenu.classList.add('hidden');
+                    }
+                }, 300); // Coincide con la duración de la transición
             });
         });
     </script>
