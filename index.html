@@ -93,11 +93,35 @@
             transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
             max-height: 0;
             opacity: 0;
-            overflow: hidden; /* Evita que el contenido se muestre antes de la animación */
+            overflow: hidden; 
         }
         #mobile-menu.open {
-            max-height: 500px; /* Suficiente altura para el menú */
+            max-height: 500px; 
             opacity: 1;
+        }
+        /* Estilo para el grafiti */
+        .graffiti-image {
+            position: absolute;
+            width: 150px; /* Ajusta según el tamaño deseado */
+            opacity: 0.85; /* Ligera transparencia */
+            transform: rotate(-5deg); /* Ligera rotación */
+        }
+
+        @media (max-width: 768px) { /* Móvil */
+            .graffiti-image {
+                width: 100px; /* Más pequeño en móvil */
+                top: -10px; /* Ajusta posición para móvil */
+                right: -5px;
+            }
+            .menu-title-container h2 {
+                font-size: 2.5rem; /* Ajustar tamaño del título del menú en móvil si es necesario */
+            }
+        }
+        @media (min-width: 769px) { /* Desktop */
+            .graffiti-image {
+                top: 10px; /* Ajusta posición para desktop */
+                right: 20px; /* Ajusta posición para desktop */
+            }
         }
     </style>
     <script>
@@ -144,19 +168,14 @@
     <!-- Encabezado -->
     <header class="bg-white shadow-md sticky top-0 z-30"> 
         <nav class="container mx-auto px-4 sm:px-6 py-3 flex items-center justify-between relative">
-            <!-- Logo - Centrado en Móvil -->
             <div class="absolute inset-x-0 top-1/2 transform -translate-y-1/2 text-center md:static md:inset-auto md:transform-none md:text-left md:flex-initial">
                 <img src="logo.JPG" alt="Logo Choripues" class="h-12 md:h-16 inline-block">
             </div>
-
-            <!-- Menú para Desktop -->
             <div class="hidden md:flex flex-grow justify-center space-x-6 items-center">
                 <a href="#menu" class="text-gray-600 hover:text-brand-orange transition duration-300">El Menú</a>
                 <a href="#nosotros" class="text-gray-600 hover:text-brand-orange transition duration-300">¿Quiénes Somos?</a>
                 <a href="#contacto" class="text-gray-600 hover:text-brand-orange transition duration-300">¡Caiga Pues!</a>
             </div>
-            
-            <!-- Contenedor para Botón Pedir (Desktop) y Hamburguesa (Móvil) -->
             <div class="flex items-center md:flex-initial justify-end">
                 <a href="https://wa.me/573107625564?text=¡Hola!%20Quiero%20hacer%20un%20pedido%20de%20Choripues." target="_blank" class="hidden md:flex bg-brand-orange text-white font-bold py-2 px-4 rounded-full items-center space-x-2 hover:bg-orange-500 transition duration-300">
                     <span>Pedir Ahora</span>
@@ -171,7 +190,6 @@
                 </div>
             </div>
         </nav>
-        <!-- Menú Desplegable para Móvil -->
         <div id="mobile-menu" class="md:hidden bg-white shadow-lg absolute top-full left-0 w-full z-20">
             <a href="#menu" class="block px-4 py-3 text-gray-600 hover:bg-brand-orange hover:text-white transition duration-300">El Menú</a>
             <a href="#nosotros" class="block px-4 py-3 text-gray-600 hover:bg-brand-orange hover:text-white transition duration-300">¿Quiénes Somos?</a>
@@ -183,7 +201,6 @@
     <!-- Sección Hero con Video de Fondo (IFRAME de YouTube) -->
     <section class="hero-section">
         <div class="hero-video-container">
-            <!-- ID del video ue2CGvH7A2I -->
             <iframe 
                 src="https://www.youtube.com/embed/ue2CGvH7A2I?autoplay=1&mute=1&loop=1&playlist=ue2CGvH7A2I&controls=0&showinfo=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
                 frameborder="0" 
@@ -205,13 +222,17 @@
     <!-- Sección de Menú -->
     <section id="menu" class="py-16 md:py-24">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-title text-center mb-4">Lo Mero Mero de la Carta</h2>
+            <div class="text-center mb-12 relative menu-title-container">
+                <h2 class="text-4xl md:text-5xl font-title">Lo Mero Mero de la Carta</h2>
+                <!-- Imagen del Grafiti -->
+                <img src="verso.png" alt="Grafiti Más vale maña que fuerza" class="graffiti-image hidden sm:block">
+            </div>
             <p class="text-center text-gray-600 mb-12 max-w-xl mx-auto">Pa' que se antoje y pida de una. ¡Todo hecho con amor y el toque secreto de la abuela!</p>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Bandeja Paisa -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="bandeja.JPG" alt="Bandeja Paisa Choripues" class="w-full h-56 object-cover"> <!-- Altura reducida a h-56 -->
+                    <img src="bandeja.JPG" alt="Bandeja Paisa Choripues" class="w-full h-56 object-cover"> 
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Bandeja Paisa</h3>
                         <p class="text-gray-600 mt-2 text-sm">¡La mera mera! Frijoles, arroz, chicharrón, carne molida, chorizo, huevo, plátano maduro, arepa y aguacate.</p>
@@ -220,7 +241,7 @@
                 </div>
                 <!-- Frijolada -->
                  <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="otra bandejq.JPG" alt="Frijolada Choripues" class="w-full h-56 object-cover"> <!-- Altura reducida a h-56 -->
+                    <img src="otra bandejq.JPG" alt="Frijolada Choripues" class="w-full h-56 object-cover"> 
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Frijolada CHORIPUES</h3>
                         <p class="text-gray-600 mt-2 text-sm">Una cazuela llena del mejor sabor de nuestros fríjoles tradicionales.</p>
@@ -229,7 +250,7 @@
                 </div>
                 <!-- Picada Paisa -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="picada.JPG" alt="Picada Paisa Choripues" class="w-full h-56 object-cover"> <!-- Altura reducida a h-56 -->
+                    <img src="picada.JPG" alt="Picada Paisa Choripues" class="w-full h-56 object-cover"> 
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Picada Paisa CHORIPUES</h3>
                         <p class="text-gray-600 mt-2 text-sm">Pa' compartir con los parceros. Chicharrón, chorizo, morcilla, papa y patacón.</p>
@@ -238,7 +259,7 @@
                 </div>
                 <!-- Bandeja TODOPUES -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="bandeja todo pues.JPG" alt="Bandeja Todopues de Choripues" class="w-full h-56 object-cover"> <!-- Altura reducida a h-56 -->
+                    <img src="bandeja todo pues.JPG" alt="Bandeja Todopues de Choripues" class="w-full h-56 object-cover"> 
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Bandeja TODOPUES</h3>
                         <p class="text-gray-600 mt-2 text-sm">Una versión más ligera pero con todo el sabor: chorizo, chicharrón, morcilla y maduro.</p>
@@ -247,7 +268,7 @@
                 </div>
                 <!-- Arepas Rellenas -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="image_bbf561.png" alt="Arepas Rellenas en Choripues" class="w-full h-56 object-contain p-2 bg-gray-100"> <!-- Altura reducida y object-contain -->
+                    <img src="image_bbf561.png" alt="Arepas Rellenas en Choripues" class="w-full h-56 object-contain p-2 bg-gray-100"> 
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Arepas Rellenas</h3>
                         <p class="text-gray-600 mt-2 text-sm">La arepita paisa pero llevada a otro nivel. ¡Pregunta por los rellenos!</p>
@@ -256,7 +277,7 @@
                 </div>
                 <!-- Pa' la Sed -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="image_bbf239.png" alt="Bebidas en Choripues" class="w-full h-56 object-contain p-2 bg-gray-100"> <!-- Altura reducida y object-contain -->
+                    <img src="image_bbf239.png" alt="Bebidas en Choripues" class="w-full h-56 object-contain p-2 bg-gray-100"> 
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Pa' la Sed</h3>
                         <p class="text-gray-600 mt-2 text-sm">Acompañe su manjar con Gaseosa Postobón, Coca-Cola o una cervecita bien fría.</p>
@@ -343,21 +364,24 @@
         const mobileMenu = document.getElementById('mobile-menu');
 
         mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('open'); // Esta clase ahora controla max-height y opacity
-            mobileMenu.classList.toggle('hidden'); // Se usa solo para el estado inicial
+            mobileMenu.classList.toggle('open'); 
+            // En lugar de 'hidden', alternamos una clase que controle la visibilidad y la animación
+            // Esto evita problemas con 'hidden' y transiciones de 'transform'
+            if (mobileMenu.style.maxHeight) {
+                mobileMenu.style.maxHeight = null;
+                mobileMenu.style.opacity = "0";
+            } else {
+                mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
+                mobileMenu.style.opacity = "1";
+            }
         });
 
         // Cerrar menú móvil al hacer clic en un enlace
         const mobileMenuLinks = mobileMenu.querySelectorAll('a');
         mobileMenuLinks.forEach(link => {
             link.addEventListener('click', () => {
-                mobileMenu.classList.remove('open');
-                // Opcional: agregar 'hidden' después de la animación de cierre si es necesario
-                setTimeout(() => {
-                    if (!mobileMenu.classList.contains('open')) { // Solo ocultar si realmente está cerrado
-                         mobileMenu.classList.add('hidden');
-                    }
-                }, 300); // Coincide con la duración de la transición
+                mobileMenu.style.maxHeight = null;
+                mobileMenu.style.opacity = "0";
             });
         });
     </script>
