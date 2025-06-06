@@ -102,26 +102,43 @@
         /* Estilo para el grafiti */
         .graffiti-image {
             position: absolute;
-            width: 150px; /* Ajusta según el tamaño deseado */
-            opacity: 0.85; /* Ligera transparencia */
-            transform: rotate(-5deg); /* Ligera rotación */
+            width: 150px; 
+            opacity: 0.85; 
+            transform: rotate(-5deg); 
         }
 
         @media (max-width: 768px) { /* Móvil */
             .graffiti-image {
-                width: 100px; /* Más pequeño en móvil */
-                top: -10px; /* Ajusta posición para móvil */
+                width: 100px; 
+                top: -10px; 
                 right: -5px;
             }
             .menu-title-container h2 {
-                font-size: 2.5rem; /* Ajustar tamaño del título del menú en móvil si es necesario */
+                font-size: 2.5rem; 
             }
         }
         @media (min-width: 769px) { /* Desktop */
             .graffiti-image {
-                top: 10px; /* Ajusta posición para desktop */
-                right: 20px; /* Ajusta posición para desktop */
+                top: 10px; 
+                right: 20px; 
             }
+        }
+        /* Estilo para iframes de videos en el menú */
+        .menu-video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background-color: #000; /* Fondo mientras carga el video */
+        }
+        .menu-video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
         }
     </style>
     <script>
@@ -224,7 +241,6 @@
         <div class="container mx-auto px-6">
             <div class="text-center mb-12 relative menu-title-container">
                 <h2 class="text-4xl md:text-5xl font-title">Lo Mero Mero de la Carta</h2>
-                <!-- Imagen del Grafiti -->
                 <img src="verso.png" alt="Grafiti Más vale maña que fuerza" class="graffiti-image hidden sm:block">
             </div>
             <p class="text-center text-gray-600 mb-12 max-w-xl mx-auto">Pa' que se antoje y pida de una. ¡Todo hecho con amor y el toque secreto de la abuela!</p>
@@ -239,12 +255,17 @@
                         <p class="text-xl font-bold mt-4">COP $33,000</p>
                     </div>
                 </div>
-                <!-- Frijolada -->
-                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="FAA4D78F-B79D-46F8-8FD3-15D25B99A5A3.png" alt="Frijolada Choripues" class="w-full h-56 object-cover"> 
+                <!-- Frijolada CHORIPUES con Video de Prueba -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="menu-video-wrapper"> <!-- Contenedor para el video -->
+                        <iframe 
+                            src="https://www.youtube.com/embed/5ZD14R1c-QY?controls=1&showinfo=0&rel=0" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Frijolada CHORIPUES</h3>
-                        <p class="text-gray-600 mt-2 text-sm">Una cazuela llena del mejor sabor de nuestros fríjoles tradicionales.</p>
+                        <p class="text-gray-600 mt-2 text-sm">Una cazuela llena del mejor sabor de nuestros fríjoles tradicionales. ¡Mire el video!</p>
                         <p class="text-xl font-bold mt-4">COP $21,000</p>
                     </div>
                 </div>
