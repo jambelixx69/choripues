@@ -41,27 +41,20 @@
             height: 100%;
             cursor: pointer;
         }
-        /* Estilos para el video de fondo con iframe de YouTube */
+        /* Estilos para el video de fondo con etiqueta <video> */
         .hero-video-container {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%; 
-            height: 100%; 
+            width: 100%;
+            height: 100%;
             overflow: hidden;
             z-index: 1; 
         }
-        .hero-video-container iframe {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100vw; 
-            height: 56.25vw; /* 16:9 aspect ratio */
-            min-height: 100vh; 
-            min-width: 177.77vh; /* 16:9 aspect ratio for min-width */
-            transform: translate(-50%, -50%);
-            pointer-events: none; 
-            border: none;
+        .hero-video {
+            width: 100%; 
+            height: 100%;
+            object-fit: cover; /* Clave para un bucle perfecto y sin barras */
         }
         .hero-section {
             position: relative; 
@@ -84,7 +77,6 @@
             align-items: center;
             padding: 1rem; 
             text-align: center; 
-            /* background-color: rgba(0, 0, 0, 0.3); /* Overlay opcional si el texto no se lee bien */
         }
         .text-shadow { 
             text-shadow: 2px 2px 8px rgba(0,0,0,0.7); 
@@ -123,16 +115,16 @@
                 right: 20px; 
             }
         }
-        /* Estilo para iframes de videos en el menú */
+        /* Estilo para iframes y videos en el menú */
         .menu-video-wrapper {
             position: relative;
             width: 100%;
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
             height: 0;
             overflow: hidden;
-            background-color: #000; /* Fondo mientras carga el video */
+            background-color: #000;
         }
-        .menu-video-wrapper iframe {
+        .menu-video-wrapper iframe, .menu-video-wrapper video {
             position: absolute;
             top: 0;
             left: 0;
@@ -215,15 +207,13 @@
         </div>
     </header>
 
-    <!-- Sección Hero con Video de Fondo (IFRAME de YouTube) -->
+    <!-- Sección Hero con Video de Fondo (Solución con <video>) -->
     <section class="hero-section">
         <div class="hero-video-container">
-            <iframe 
-                src="https://www.youtube.com/embed/ue2CGvH7A2I?autoplay=1&mute=1&loop=1&playlist=ue2CGvH7A2I&controls=0&showinfo=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1"
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen>
-            </iframe>
+            <video autoplay loop muted playsinline class="hero-video">
+                <source src="video-hero.mp4" type="video/mp4">
+                Tu navegador no soporta videos HTML5.
+            </video>
         </div>
         <div class="hero-content-overlay"> 
             <div class="container mx-auto px-6">
@@ -249,10 +239,7 @@
                 <!-- Bandeja Paisa con Video -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
                     <div class="menu-video-wrapper">
-                        <iframe 
-                            src="https://www.youtube.com/embed/ue2CGvH7A2I?controls=1&showinfo=0&rel=0" 
-                            allowfullscreen>
-                        </iframe>
+                        <iframe src="https://www.youtube.com/embed/ue2CGvH7A2I?controls=1&showinfo=0&rel=0" allowfullscreen></iframe>
                     </div>
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Bandeja Paisa</h3>
@@ -263,10 +250,7 @@
                 <!-- Frijolada CHORIPUES con Video -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
                     <div class="menu-video-wrapper"> 
-                        <iframe 
-                            src="https://www.youtube.com/embed/5ZD14R1c-QY?controls=1&showinfo=0&rel=0" 
-                            allowfullscreen>
-                        </iframe>
+                        <iframe src="https://www.youtube.com/embed/5ZD14R1c-QY?controls=1&showinfo=0&rel=0" allowfullscreen></iframe>
                     </div>
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Frijolada CHORIPUES</h3>
@@ -274,22 +258,46 @@
                         <p class="text-xl font-bold mt-4">COP $21,000</p>
                     </div>
                 </div>
-                <!-- Picada Paisa -->
+                <!-- Picada Paisa con Video -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="picada.JPG" alt="Picada Paisa Choripues" class="w-full h-56 object-cover"> 
+                    <div class="menu-video-wrapper">
+                        <video controls class="w-full h-full">
+                            <source src="picada.mp4" type="video/mp4">
+                            Su navegador no soporta videos.
+                        </video>
+                    </div>
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Picada Paisa CHORIPUES</h3>
                         <p class="text-gray-600 mt-2 text-sm">Pa' compartir con los parceros. Chicharrón, chorizo, morcilla, papa y patacón.</p>
                         <p class="text-xl font-bold mt-4">COP $25,000</p>
                     </div>
                 </div>
-                <!-- Bandeja TODOPUES -->
+                <!-- Bandeja TODOPUES con Video -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="bandeja todo pues.JPG" alt="Bandeja Todopues de Choripues" class="w-full h-56 object-cover"> 
+                    <div class="menu-video-wrapper">
+                        <video controls class="w-full h-full">
+                            <source src="bandeja_todopues.mp4" type="video/mp4">
+                            Su navegador no soporta videos.
+                        </video>
+                    </div>
                     <div class="p-6">
                         <h3 class="text-2xl font-bold font-title text-brand-orange">Bandeja TODOPUES</h3>
                         <p class="text-gray-600 mt-2 text-sm">Una versión más ligera pero con todo el sabor: chorizo, chicharrón, morcilla y maduro.</p>
                         <p class="text-xl font-bold mt-4">COP $25,000</p>
+                    </div>
+                </div>
+                <!-- Cazuela Montañera con Video -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="menu-video-wrapper">
+                        <video controls class="w-full h-full">
+                            <source src="cazuela_montañera.mp4" type="video/mp4">
+                            Su navegador no soporta videos.
+                        </video>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold font-title text-brand-orange">Cazuela Montañera</h3>
+                        <p class="text-gray-600 mt-2 text-sm">El sabor de la montaña en una cazuela. ¡Puro poder!</p>
+                        <p class="text-xl font-bold mt-4">COP $27,000</p>
                     </div>
                 </div>
                 <!-- Arepas Rellenas -->
@@ -301,19 +309,9 @@
                         <p class="text-xl font-bold mt-4">COP $12,500</p>
                     </div>
                 </div>
-                <!-- Pa' la Sed -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <img src="image_bbf239.png" alt="Bebidas en Choripues" class="w-full h-56 object-contain p-2 bg-gray-100"> 
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold font-title text-brand-orange">Pa' la Sed</h3>
-                        <p class="text-gray-600 mt-2 text-sm">Acompañe su manjar con Gaseosa Postobón, Coca-Cola o una cervecita bien fría.</p>
-                        <p class="text-xl font-bold mt-4">Desde $4,500</p>
-                    </div>
-                </div>
             </div>
             <div class="text-center mt-12">
-                 <p class="italic text-gray-700">¡Y mucho más! Tenemos mondongo, cazuela, calentao, tamales... ¡Pregúntanos por tu favorito!</p>
-                 <p class="mt-4 text-sm text-gray-500">Nota: Las imágenes de los platos son de referencia. Para una mejor apreciación, te recomendamos visitarnos o pedir nuevas fotos.</p>
+                 <p class="italic text-gray-700">¡Y mucho más! Tenemos mondongo, Pa' la Sed, calentao, tamales... ¡Pregúntanos por tu favorito!</p>
             </div>
         </div>
     </section>
@@ -391,8 +389,6 @@
 
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('open'); 
-            // En lugar de 'hidden', alternamos una clase que controle la visibilidad y la animación
-            // Esto evita problemas con 'hidden' y transiciones de 'transform'
             if (mobileMenu.style.maxHeight) {
                 mobileMenu.style.maxHeight = null;
                 mobileMenu.style.opacity = "0";
